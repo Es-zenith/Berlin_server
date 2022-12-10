@@ -21,6 +21,26 @@ app.use("/api", indexRoutes);
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
+app.post('/signup', (req, res) => {
+    const { username, password, email } = req.body; // destructure the request body
+  
+    // Insert the new user into the database
+    db.collection('users').insertOne({
+      username,
+      password,
+      email,
+    }, (err, result) => {
+      if (err) {
+        // Return an error if the insertion fails
+        console.error(err);
+        res.status(500).send('Error signing up user');
+      } else {
+        // Return a success response if the insertion succeeds
+        res.send({ success: true });
+      }
+    });
+  });
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
