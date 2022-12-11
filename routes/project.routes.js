@@ -14,6 +14,13 @@ router.post("/projects", (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
+router.get("/landingPage", (req, res, next) => {
+  Project.find()
+    .populate("tasks")
+    .then((allProjects) => res.json(allProjects))
+    .catch((err) => res.json(err));
+});
+
 //  GET /api/projects -  Retrieves all of the projects
 router.get("/projects", (req, res, next) => {
   Project.find()
