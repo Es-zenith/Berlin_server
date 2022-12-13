@@ -4,14 +4,34 @@ const mongoose = require("mongoose");
 
 const Project = require("../models/Project.model");
 const Task = require("../models/Task.model");
+const fileUploader = require("../config/cloudinary.config");
 
 //  POST /api/projects  -  Creates a new project
 router.post("/projects", (req, res, next) => {
-  const { title, description } = req.body;
+  const { title, description, peopleLimit, owner, imageUrl } = req.body;
 
-  Project.create({ title, description, tasks: [] })
-    .then((response) => res.json(response))
+  Project.create({ title, description, peopleLimit, tasks: [] , owner, imageUrl})
+    .then((response) =>{
+      console.log(user._id)
+      console.log(response )
+      return res.json(response)
+    } )
     .catch((err) => res.json(err));
+});
+
+// POST "/api/upload" => Route that receives the image, sends it to Cloudinary via the fileUploader and returns the image URL
+router.post("/upload", fileUploader.single("imageUrl"), (req, res, next) => {
+  console.log("file is: ", req.file)
+ 
+  if (!req.file) {
+    next(new Error("No file uploaded!"));
+    return;
+  }
+  
+  // Get the URL of the uploaded file and send it as a response.
+  // 'fileUrl' can be any name, just make sure you remember to use the same when accessing it on the frontend
+  
+  res.json({ fileUrl: req.file.path });
 });
 
 router.get("/landingPage", (req, res, next) => {
