@@ -7,8 +7,8 @@ const userSchema = new Schema({
   name: { type: String, required: true },
   age: { type: String, required: true },
   sex: { type: Number },
-  location: { type: String},
-  interests: { type: String},
+  location: String,
+  interests: String,
   projects: [{ type: Schema.Types.ObjectId, ref: "Project" }],
   imageUrl: String,
 });
