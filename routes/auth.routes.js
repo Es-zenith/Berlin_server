@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 const User = require("../models/User.model");
+const Task = require("../models/Task.model");
 
 const { isAuthenticated } = require('./../middleware/jwt.middleware.js');
 

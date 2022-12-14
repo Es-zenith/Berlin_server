@@ -6,10 +6,11 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   name: { type: String, required: true },
   age: { type: String, required: true },
-  sex: { type: Number },
+  sex: { type: String, enum: ['Male', 'Female', 'Others'] },
   location: String,
   interests: String,
-  projects: [{ type: Schema.Types.ObjectId, ref: "Project" }],
+  projects: { type: Schema.Types.ObjectId, ref: "Project" },
+  tasks: [{ type: Schema.Types.ObjectId, ref: "Task" }],
   imageUrl: String,
 });
 
