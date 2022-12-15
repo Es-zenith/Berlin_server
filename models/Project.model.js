@@ -6,6 +6,7 @@ const projectSchema = new Schema({
   description: { type: String, required: true },
   peopleLimit: Number,
   owner: { type: Schema.Types.ObjectId, ref: "User" },
+  ownerName: String,
   tasks: [{ type: Schema.Types.ObjectId, ref: "Task" }],
   imageUrl: String,
   date: String,

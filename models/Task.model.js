@@ -5,6 +5,7 @@ const taskSchema = new Schema({
   description: String,
   project: { type: Schema.Types.ObjectId, ref: "Project" },
   owner: { type: Schema.Types.ObjectId, ref: "User" },
+  ownerName: String,
 });
 
 module.exports = model("Task", taskSchema);

@@ -7,9 +7,9 @@ const Project = require("../models/Project.model");
 
 //  POST /api/tasks  -  Creates a new task
 router.post("/tasks", (req, res, next) => {
-  const { title, description, projectId, userId } = req.body;
+  const { title, description, projectId, userId, ownerName } = req.body;
 
-  Task.create({ title, description, project: projectId, owner: userId })
+  Task.create({ title, description, project: projectId, owner: userId , ownerName})
     .then((newTask) => {
       return Project.findByIdAndUpdate(projectId, {
         $push: { tasks: newTask._id },

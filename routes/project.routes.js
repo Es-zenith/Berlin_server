@@ -8,9 +8,9 @@ const fileUploader = require("../config/cloudinary.config");
 
 //  POST /api/projects  -  Creates a new project
 router.post("/projects", (req, res, next) => {
-  const { title, description, peopleLimit, owner, imageUrl, date, time, place } = req.body;
+  const { title, description, peopleLimit, owner, imageUrl, date, time, place, ownerName } = req.body;
 
-  Project.create({ title, description, peopleLimit, tasks: [] , owner, imageUrl, date, time, place})
+  Project.create({ title, description, peopleLimit, tasks: [] , owner, imageUrl, date, time, place, ownerName})
     .then((response) =>{
       console.log(user._id)
       console.log(response )
@@ -44,7 +44,7 @@ router.get("/landingPage", (req, res, next) => {
 //  GET /api/projects -  Retrieves all of the projects
 router.get("/projects", (req, res, next) => {
   Project.find()
-    .populate("tasks")
+    .populate("owner")
     .then((allProjects) => res.json(allProjects))
     .catch((err) => res.json(err));
 });
