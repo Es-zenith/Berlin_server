@@ -19,7 +19,7 @@ module.exports = (app) => {
 
   app.use(
     cors({
-      origin: ["https://berlinsocialclub.netlify.app"],
+      origin: ["http://localhost:3000"],
     })
   );
 
